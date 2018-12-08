@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "UploadIdea";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>UploadIdea</h2>
+<head>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm("Uploadidea", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label>Key</label>
+                <input type="text" name="key" height="700" rows="10" cols="30" required>
+                <br />
+                <br />
+                <label>Title</label>
+                <input type="text" name="title" height="700" rows="10" cols="30" required>
+                <br />
+                <br />
+                <label>Description</label>
+                <textarea type="text" name="description" height="700" rows="10" cols="30" required></textarea>
+                <br />
+                <br />
+
+
+                <div class="input-group">
+
+
+                    <input type="submit" value=" upload Idea" />
+
+
+                </div>
+
+            </div>
+        }
+    </div>
+</body>
+</html>

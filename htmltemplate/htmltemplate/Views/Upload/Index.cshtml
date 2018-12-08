@@ -1,0 +1,53 @@
+﻿@model  IEnumerable<htmltemplate.Models.RequestedIdeas>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<html>
+<head>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div class="container">
+        @{
+
+            //List<string> list = new List<string>();
+            List<SelectListItem> lst = new List<SelectListItem>();
+            foreach (var item in Model)
+            {
+                lst.Add(new SelectListItem
+                {
+                    Text = item.IdeaId,
+                    Value = item.IdeaId
+                });
+
+                //list.Add(item.IdeaId);
+
+            }
+
+        }
+        @using(Html.BeginForm("Index","Upload",FormMethod.Post,new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2">SelectIdea</label>
+
+                @Html.DropDownList("idea", lst, new { @class = "form-control" })
+                <label>Description</label>
+                <textarea type="text" name="test" height="700" rows="10" cols="30" required></textarea>
+                
+            <div class="input-group">
+                @Html.TextBox("file", "", new { type="file"})<br/>
+                <input type="submit" value=" upload files" />
+                
+
+            </div>
+
+            </div>
+        }
+    </div>
+</body>
+</html>

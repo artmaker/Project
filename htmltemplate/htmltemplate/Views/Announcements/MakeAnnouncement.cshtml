@@ -1,0 +1,81 @@
+﻿@model htmltemplate.Models.DropDown
+@{
+    ViewBag.Title = "MakeAnnouncements";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>MAke Announcements</h2>
+<head>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div class="container">
+        @{
+            int c = Model.Ideas.Count();
+            //List<string> list = new List<string>();
+            List<SelectListItem> lst = new List<SelectListItem>();
+            foreach (var item in Model.Ideas)
+            {
+                lst.Add(new SelectListItem
+                {
+                    Text = item.IdeaId,
+                    Value = item.IdeaId,
+                });
+
+                //list.Add(item.IdeaId);
+
+            }
+            string fin = "";
+            //IEnumerable<string> lists = list.AsEnumerable();
+        }
+        
+        @if(lst.Count!=0) { 
+        using (Html.BeginForm("MakeAnnouncement", "Announcements", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label class = "control-label col-md-2">Description</label>
+                <textarea type="text" name="description" height="700" rows="10" cols="30" class = "form-control" required></textarea>
+                <br />
+                <br />
+                
+                <label class = "control-label col-md-2">DeadLine</label>
+                <input type="text" name="deadline" height="700" rows="10" cols="30" class = "form-control" >
+                <br />
+                <br />
+                <label class = "control-label col-md-2">SelectIdea</label>
+                
+                @Html.DropDownList("key", lst, new { @class = "form-control" })
+                       
+                @{ 
+                    ViewBag.idea = fin;
+                }
+
+                
+                <br />
+                <br />
+                
+
+
+                <div class="input-group">
+
+
+                    <input type="submit" value=" Make Announcement" />
+
+
+                </div>
+
+            </div>
+                    }
+                    }
+            @if (lst.Count==0)
+            {
+                <p>There is no idea Associated</p>
+            }
+
+    </div>
+</body>
+</html>
